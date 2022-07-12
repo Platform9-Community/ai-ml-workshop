@@ -19,13 +19,20 @@ We will deploy a Kubernetes cluster using Platform9, deploy HostPath storage, an
 - Get information about the notebook using Kubernetes commands.
   - `kubectl logs container`
 - Access the notebook and set a password using the TOKEN from the container.
-- Run “Hello, world” on your Jupyter notebook.
+- Run “Hello, world!” on your Jupyter notebook.
   - Create a new notebook and run Hello, World. Congrats, that was your first notebook on Kubernetes!
 
 ### Pre-requisites
 
-- Bare Metal: 2-3 Bare Metal Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
-- VM: with 2-3 Virtual Machines (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
+
+
+- BareOS: Bare Metal or VMs running Ubuntu 20.04
+  - Bare Metal: 2-3 Bare Metal Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
+  - VM: with 2-3 Virtual Machines Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
+
+- LoadBalancer or NodePort
+  - LoadBalancer will require MetalLB being deployed when configuring the cluster. 
+  - NodePort will not require additional configuration during cluster deployment.
 
 ### Kubernetes Benefits
 
@@ -56,3 +63,7 @@ View the logs from the container so that we can pull the token needed to login.
 ### Hello World! Example
 
 Create a new notebook and run Hello World!
+
+```python
+print("Hello World!")
+```
