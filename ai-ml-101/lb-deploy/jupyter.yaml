@@ -82,7 +82,7 @@ spec:
         claimName: notebook-data-claim
   containers:
     - name: jupyter
-      image: jupyter/base-notebook
+      image: jupyter/scipy-notebook
       ports:
         - name: http
           containerPort: 8888
@@ -96,6 +96,11 @@ spec:
       volumeMounts:
         - name: notebook-data
           mountPath: "/home/jovyan"
+      resources:
+        requests:
+          memory: 1000Mi
+        limits:
+          memory: 2000Mi
   initContainers:
       - name: jupyter-data-permission-fix
         image: busybox

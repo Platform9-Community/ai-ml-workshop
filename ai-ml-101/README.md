@@ -31,7 +31,7 @@ We will deploy a Kubernetes cluster using Platform9, deploy HostPath storage, an
   - VM: with 2-3 Virtual Machines Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
 
 - LoadBalancer or NodePort
-  - LoadBalancer will require MetalLB being deployed when configuring the cluster. 
+  - LoadBalancer will require MetalLB being deployed when configuring the cluster.
   - NodePort will not require additional configuration during cluster deployment.
 
 ### Kubernetes Benefits
