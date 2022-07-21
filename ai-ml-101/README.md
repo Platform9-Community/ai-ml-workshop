@@ -52,7 +52,7 @@ This will be done using the App Catalog.
 
 ### Deploy a Jupyter Notebook
 
-Create a deployment using jupyter/base-notebook.
+Create a deployment using jupyter/tensorflow-notebook. (<https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>)
 
 Examples for two methods, one being NodePort and the other being LoadBalancer.
 
@@ -65,5 +65,5 @@ View the logs from the container so that we can pull the token needed to login.
 Create a new notebook and run Hello World!
 
 ```python
-print("Hello World!")
+print("Hello, World!")
 ```
