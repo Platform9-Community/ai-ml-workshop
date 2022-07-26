@@ -147,6 +147,7 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
   NAME               TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                                        AGE
   jupyter   LoadBalancer   10.21.161.60   192.168.86.10   8888:32765/TCP   35m
   ```
+
   In this example the IP would be the External-IP `192.168.86.10`. Our URL would end up being:
 
   http://192.168.86.10:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
@@ -157,6 +158,7 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
   # Jupyter
   192.168.86.10	jupyter
   ```
+
   This would allow you to copy/paste from the container logs and use: 
 
   http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
@@ -197,10 +199,21 @@ Download the notebook from <https://www.tensorflow.org/tutorials/images/classifi
 
 Download the notebook from <https://www.tensorflow.org/hub/tutorials/tf2_object_detection>
 
-Once one of the notebooks have been downloaded we can upload the notebook. At this point we will upload the notebook, open it, and then restart and run the notebook.
+- Image Classification Notebook
 
-- If you are using the object detection notebook then you will need to update the line that installs tensorflow to also install tensorflow-hub as your image only includes tensorflow.
-  - `!pip install tensorflow-hub`
+Below you can see the "upload" option. Select upload and then select the notebook you downloaded. We will start out with image classification.
+
+![alt text](images/jupyter.png)
+
+Once it has been uploaded we can select the notebook in the list and it will bring it up in a new tab. Within the new tab select "Restart Kernel and Run All Cells...", which will start running our notebook.
+
+![alt text](images/jupyter-image-class.png)
+
+- Object Detection Notebook
+
+The object detection notebook requires tensorflow-hub, which is not part of our base image. Update the section in the image to include the following:
+
+`!pip install tensorflow-hub`
 
 ![alt text](images/tf-hub.png)
 
