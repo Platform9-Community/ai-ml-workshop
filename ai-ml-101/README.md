@@ -187,11 +187,17 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
 ## Hello World! Example
 
-Create a new notebook and run Hello World!
+Now we can create our first notebook. We'll start out with a Python3 Notebook, which shows up in the dashboard. Click the Python 3 (ipykernel) option under Notebook. This will create a new notebook.
+
+![alt text](images/python3-notebook.png)
+
+In the next screen we'll add "Hello, world!" to the first box and then select "Run the Selected Cells and Advance".
 
 ```python
-print("Hello, World!")
+print("Hello, world!")
 ```
+
+![alt text](images/hello-world.png)
 
 ## Tensorflow Example Notebook
 
