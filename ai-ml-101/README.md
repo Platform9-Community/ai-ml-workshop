@@ -29,7 +29,9 @@ We will deploy a Kubernetes cluster using Platform9, deploy hostpath storage, an
   - LoadBalancer will require MetalLB being deployed when configuring the cluster.
   - NodePort will not require additional configuration during cluster deployment.
 
-- Tested both of the Tensorflow examples with small VMs. The workers were 8GB Memory / 4 CPU nodes. For faster results you may want to use larger VMs. The Workshop actually used 32GB Memory / 16 CPU nodes for workers.
+- Tested both of the Tensorflow examples with small VMs. The workers were 8GB Memory and 4 CPU nodes.
+  - For faster results you may want to use larger VMs. The Workshop actually used 3 x 32GB Memory and 16 CPU nodes.
+  - I would recommend 3 nodes with around 16GB+ Memory and 4+ CPU. Anything over this will help reduce the time it takes to run a notebook and support multiple notebooks running on the same nodes.
   - If you're running your own deployment/pod and are having issues with the kernel dying frequently, verify that you are adding the requests field with 1GB+ for memory.
 
 ```yml
@@ -46,14 +48,15 @@ Ideally after running a single pod for a Jupyter notebook for testing, we would 
 
 ## Deploy a Cluster with Platform9 Free Tier
 
-We are going to start out by deploying a Kubernetes cluster using Platform9.
-
-- Bare Metal: 2-3 Bare Metal Nodes <https://platform9.com/docs/kubernetes/get-started-bare-metal>
-- VM: with 2-3 Virtual Machines Nodes <https://platform9.com/docs/kubernetes/get-started-bare-metal>
+We are going to start out by deploying a Kubernetes cluster using Platform9. Here is a view of the Dashboard, we will walk through a deployment using 3 Virtual Machines for this demo.
 
 ![alt text](images/dashboard.png)
 
-We will access the cluster using kubectl, which means we will need to install kubectl <https://kubernetes.io/docs/tasks/tools/#kubectl>
+For installation information check out the links below. The same guide can be used for Bare Metal or VMs. We will want to 
+
+- <https://platform9.com/docs/kubernetes/get-started-bare-metal>
+
+We will access the cluster using kubectl, which means we will need to install kubectl (<https://kubernetes.io/docs/tasks/tools/#kubectl>)
 
 ## Configure Storage with the CSI HostPath Driver
 
@@ -79,21 +82,21 @@ Select the storage option in the menu and then CSI Drivers to view information a
 
 Create a deployment using jupyter/tensorflow-notebook. (<https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>)
 
-Examples for two methods, one being NodePort and the other being LoadBalancer.
+Examples for two methods, NodePort and LoadBalancer.
 
-At this point we can either clone the github repository (<https://github.com/Platform9-Community/ai-ml-workshop>) or you can download/copy the jupyter.yaml file from either the NodePort folder or the LoadBalancer folder under the ai-ml-101 directory.
+At this point we can either clone the github repository (<https://github.com/Platform9-Community/ai-ml-workshop>) or you can download/copy the jupyter.yaml file from either the NodePort folder or the LoadBalancer folder under the ai-ml-101/ directory.
 
-Once you have the file on your machine, or somewhere that can use kubectl to access the cluster, we can run:
+Once we have the file on our machine, or somewhere that can use kubectl to access the cluster, we can run:
 
 `kubectl create -f jupyter.yaml`
 
 ## Access the Notebook
 
-Once the notebook has deployed we can pull the logs to figure out the URL + Token. The Tensorflow image is around 1GB so it can take a few moments for the pod to move into a running state. 
+Once the notebook has deployed we can pull the logs to figure out the URL + Token. The Tensorflow image is around 1GB so it can take a few moments for the pod to move into a running state.
 
 Assuming we are deployed in the default namespace, we can view the status of the pod using:
 
-`kubectl get pods -w`
+`kubectl get pods`
 
 ```bash
 $ kubectl get pods
@@ -103,7 +106,7 @@ jupyter   1/1     Running   0          31m
 
 If the original yaml file was modified to use namespaces you would need to specify the namespace:
 
-`kubectl get pods -n NAMESPACE -w`
+`kubectl get pods -n NAMESPACE`
 
 Once the pod is in a running state we can view the logs:
 
@@ -134,13 +137,13 @@ Executing the command: jupyter lab
      or http://127.0.0.1:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 ```
 
-In the example above we are looking for the URL: 
+In the example above we are looking for the URL:
 
 http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
 - LoadBalancer
 
-  If you are using a LoadBalancer then you can replace `jupyter` with the LoadBalancer IP:
+  If you are using a LoadBalancer then you can replace `jupyter` with the LoadBalancer External-IP:
 
   ```bash
   $ kubectl get service jupyter
@@ -152,14 +155,14 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
   http://192.168.86.10:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
-  If you want to test this out more and are going to keep redeploying with the same configuration, then you can create a record in /etc/hosts for `jupyter`:
+  If you want to test this out more, and are going to keep redeploying with the same configuration, then you can create a record in /etc/hosts for `jupyter`:
   
   ```bash
   # Jupyter
   192.168.86.10	jupyter
   ```
 
-  This would allow you to copy/paste from the container logs and use: 
+  This would allow you to copy/paste from the container logs and use:
 
   http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
@@ -205,7 +208,7 @@ Download the notebook from <https://www.tensorflow.org/tutorials/images/classifi
 
 Download the notebook from <https://www.tensorflow.org/hub/tutorials/tf2_object_detection>
 
-- Image Classification Notebook
+### Image Classification Notebook
 
 Below you can see the "upload" option. Select upload and then select the notebook you downloaded. We will start out with image classification.
 
@@ -215,13 +218,21 @@ Once it has been uploaded we can select the notebook in the list and it will bri
 
 ![alt text](images/jupyter-image-class.png)
 
-- Object Detection Notebook
+### Object Detection Notebook
 
 The object detection notebook requires tensorflow-hub, which is not part of our base image. Update the section in the image to include the following:
 
 `!pip install tensorflow-hub`
 
 ![alt text](images/tf-hub.png)
+
+After the update we will select "Restart Kernel and Run All Cells..." like we did above for the image classification notebook.
+
+We can modify sections of the object detection notebook if we want to test different images. In Box 11 we can modify the selected_image option and choose one from the listed options. Let's change it from beach to Dogs and then select "Restart Kernel and Run All Cells..." again.
+
+![alt text](images/selected_image.png)
+
+## Troubleshooting / Viewing Resource Usage
 
 There are a couple of helpful commands that we can run when the notebook is working through each section. There are a few sections that will increase the memory and cpu usage. To see what kind of impact this is having on your nodes you can run:
 
@@ -233,10 +244,18 @@ NAME            CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
 192.168.86.73   2091m        52%    7049Mi          91%       
 ```
 
-We can also view information about our cluster in the Platform9 UI:
+As you can see above we are hitting 90% usage for memory on our node. These are very small nodes with only 8GB of memory. We may even receive an alert about high usage on one of our nodes. With a larger node we probably won't see memory usage alerts unless there are multiple notebooks running at the same time.
+
+It would be more common to see CPU usage hit higher percentages as we are running through more intensive cells in our notebook. We can use the same command to view CPU usage.
+
+If we want to visualize the usage in real time, without using kubectl, we can also view information about our cluster in the Platform9 UI:
 
 ![alt text](images/pf9-clusterinfo.png)
 
+The issue I ran into the most when testing was the Kernel Dying. This seems to be resolved, even with smaller nodes, by ensuring that we add a request for at least 1GB of memory. If we set a limit on memory around 4GB then we may run into issues. If you have an upper limit you want to set, such as 8GB, that is possible however you may want to revisit if your users report issues with their kernel dying when they run cells.
+
 ## Reach out if you have questions or if you want to learn more
+
+If you have questions, or want to learn more, join our platform9 slack community. My username is mpetason.
 
 <https://slack.platform9.io/>
