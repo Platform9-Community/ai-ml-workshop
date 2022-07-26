@@ -17,18 +17,15 @@ We will deploy a Kubernetes cluster using Platform9, deploy HostPath storage, an
 - Deploying a Jupyter notebook in your Kubernetes cluster.
   - Deploy with the default container (<https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>)
 - Get information about the notebook using Kubernetes commands.
-  - `kubectl logs container`
 - Access the notebook and set a password using the TOKEN from the container.
 - Run “Hello, world!” on your Jupyter notebook.
   - Create a new notebook and run Hello, World. Congrats, that was your first notebook on Kubernetes!
+- Load an example Tensorflow Tutorial Notebook
+  - Run the Notebook and update a section or two.
 
 ### Pre-requisites
 
-
-
 - BareOS: Bare Metal or VMs running Ubuntu 20.04
-  - Bare Metal: 2-3 Bare Metal Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
-  - VM: with 2-3 Virtual Machines Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
 
 - LoadBalancer or NodePort
   - LoadBalancer will require MetalLB being deployed when configuring the cluster.
@@ -42,7 +39,10 @@ Easily scale up Jupyter notebooks for your users. Give each user access to their
 
 We are going to start out by deploying a Kubernetes cluster using Platform9.
 
-We will access the cluster using kubectl.
+- Bare Metal: 2-3 Bare Metal Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
+- VM: with 2-3 Virtual Machines Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
+
+We will access the cluster using kubectl, which means we will need to install kubectl (<https://kubernetes.io/docs/tasks/tools/#kubectl>)
 
 ### Configure Storage with the CSI HostPath Driver
 
@@ -60,6 +60,8 @@ Examples for two methods, one being NodePort and the other being LoadBalancer.
 
 View the logs from the container so that we can pull the token needed to login.
 
+`kubectl logs jupyter`
+
 ### Hello World! Example
 
 Create a new notebook and run Hello World!
@@ -67,3 +69,9 @@ Create a new notebook and run Hello World!
 ```python
 print("Hello, World!")
 ```
+
+### Tensorflow Example Notebook
+
+Download the notebook from (<https://www.tensorflow.org/tutorials/images/classification>)
+
+Download the notebook from (<https://www.tensorflow.org/hub/tutorials/tf2_object_detection>)

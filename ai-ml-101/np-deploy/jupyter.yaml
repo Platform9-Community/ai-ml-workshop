@@ -99,8 +99,6 @@ spec:
       resources:
         requests:
           memory: 1000Mi
-        limits:
-          memory: 2000Mi
   initContainers:
       - name: jupyter-data-permission-fix
         image: busybox
