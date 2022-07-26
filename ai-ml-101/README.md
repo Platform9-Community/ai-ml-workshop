@@ -42,6 +42,8 @@ We are going to start out by deploying a Kubernetes cluster using Platform9.
 - Bare Metal: 2-3 Bare Metal Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
 - VM: with 2-3 Virtual Machines Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
 
+![alt text](images/dashboard.png)
+
 We will access the cluster using kubectl, which means we will need to install kubectl (<https://kubernetes.io/docs/tasks/tools/#kubectl>)
 
 ### Configure Storage with the CSI HostPath Driver
