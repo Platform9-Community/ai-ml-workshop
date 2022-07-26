@@ -252,7 +252,7 @@ If we want to visualize the usage in real time, without using kubectl, we can al
 
 ![alt text](images/pf9-clusterinfo.png)
 
-The issue I ran into the most when testing was the Kernel Dying. This seems to be resolved, even with smaller nodes, by ensuring that we add a request for at least 1GB of memory. If we set a limit on memory around 4GB then we may run into issues. If you have an upper limit you want to set, such as 8GB, that is possible however you may want to revisit if your users report issues with their kernel dying when they run cells.
+The issue I ran into the most when testing was the kernel dying. This seems to be resolved, even with smaller nodes, by ensuring that we add a request for at least 1GB of memory. If we set a limit on memory around 4GB then we may run into issues. If you have an upper limit you want to set, such as 8GB, that is possible however you may want to revisit if your users report issues with their kernel dying when they run cells.
 
 ## Reach out if you have questions or if you want to learn more
 
