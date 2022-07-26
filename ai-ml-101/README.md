@@ -77,11 +77,11 @@ Select the storage option in the menu and then CSI Drivers to view information a
 
 ## Deploy a Jupyter Notebook
 
-Create a deployment using jupyter/tensorflow-notebook. <https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>
+Create a deployment using jupyter/tensorflow-notebook. (<https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>)
 
 Examples for two methods, one being NodePort and the other being LoadBalancer.
 
-At this point we can either clone the github repository <https://github.com/Platform9-Community/ai-ml-workshop> or you can download/copy the jupyter.yaml file from either the NodePort folder or the LoadBalancer folder under the ai-ml-101 directory.
+At this point we can either clone the github repository (<https://github.com/Platform9-Community/ai-ml-workshop>) or you can download/copy the jupyter.yaml file from either the NodePort folder or the LoadBalancer folder under the ai-ml-101 directory.
 
 Once you have the file on your machine, or somewhere that can use kubectl to access the cluster, we can run:
 
@@ -151,7 +151,25 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
 - NodePort
 
+  If you are using a NodePort service then you will need to figure out the IP + Port to use to replace "jupyter":
 
+```bash
+$ kubectl get svc jupyter
+NAME      TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+jupyter   NodePort   10.21.50.177   <none>        8888:30833/TCP   6s
+```
+
+```bash
+$ kubectl get nodes
+NAME            STATUS   ROLES    AGE    VERSION
+192.168.86.71   Ready    worker   174m   v1.21.3
+192.168.86.72   Ready    master   174m   v1.21.3
+192.168.86.73   Ready    worker   174m   v1.21.3
+```
+
+We can build out our URL using an IP address from one of our nodes and the port from our NodePort service:
+
+http://192.168.86.71:32765/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
 ## Hello World! Example
 
