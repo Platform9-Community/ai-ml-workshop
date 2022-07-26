@@ -31,11 +31,12 @@ We will deploy a Kubernetes cluster using Platform9, deploy hostpath storage, an
 
 - Tested both of the Tensorflow examples with small VMs. The workers were 8GB Memory / 4 CPU nodes. For faster results you may want to use larger VMs. The Workshop actually used 32GB Memory / 16 CPU nodes for workers.
   - If you're running your own deployment/pod and are having issues with the kernel dying frequently, verify that you are adding the requests field with 1GB+ for memory.
-  - ```yml
-        resources:
-        requests:
-          memory: 1000Mi
-  ```
+
+```yml
+resources:
+  requests:
+    memory: 1000Mi
+```
 
 ## Kubernetes Benefits
 
