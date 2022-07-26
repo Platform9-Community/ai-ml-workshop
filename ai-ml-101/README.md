@@ -7,13 +7,13 @@ We will deploy a Kubernetes cluster using Platform9, deploy hostpath storage, an
 ## Action Items
 
 - Benefits for Machine Learning.
-- Deploy a cluster with Platform9 Free Tier.
+- Deploy a cluster with Platform9 Free Tier. (<https://platform9.com/signup/>)
   - We will deploy a BareOS Cluster
     - Platform9 uses the term ‘BareOS’ to refer to a set of physical or virtual machines in your on-premises infrastructure that have a supported linux operating system installed that can be used to create an on-premises Kubernetes cluster.
 - Configure cluster storage with the CSI HostPath driver.
   - Deploy using the App Catalog.
 - Deploying a Jupyter notebook in your Kubernetes cluster.
-  - Deploy with the default container <https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>
+  - Deploy with the default container for Tensorflow (<https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>)
 - Get information about the notebook using Kubernetes commands.
 - Access the Notebook using a token.
 - Run “Hello, world!” on your Jupyter notebook.
@@ -40,7 +40,9 @@ resources:
 
 ## Kubernetes Benefits
 
-Easily scale up Jupyter notebooks for your users. Give each user access to their own notebook so that they can experiment. Ideally after running a single pod for a Jupyter notebook for testing, we would progress to configuring JupyterHub <https://zero-to-jupyterhub.readthedocs.io/en/latest/> to help automate notebooks for our users.
+Easily scale up Jupyter notebooks for your users. Give each user access to their own notebook so that they can experiment. Provide persistent storage so that users can save their work. Optimize server usage by allowing multiple workloads to run at the same time. Provide larger resource pools to users who may need more than what is provided locally (laptop/local compute).
+
+Ideally after running a single pod for a Jupyter notebook for testing, we would progress to configuring JupyterHub (<https://zero-to-jupyterhub.readthedocs.io/en/latest/>) to help automate notebooks for our users.
 
 ## Deploy a Cluster with Platform9 Free Tier
 
@@ -59,7 +61,13 @@ Now that we have a cluster we will deploy a storage provider so that we can save
 
 This will be done using the App Catalog. The App Catalog will allow us to quickly deploy helm based applications.
 
+We are going to walk through a simple storage deployment using hostpath. In a production environment you may consider using something like Rook + Ceph instead of hostpath.  This section introduces the App Catalog and options within it, such as being able to modify a default configuration with specific values.
+
 ![alt text](images/hostpath.png)
+
+![alt text](images/hostpath-config.png)
+
+![alt text](images/csi-drivers.png)
 
 ## Deploy a Jupyter Notebook
 
