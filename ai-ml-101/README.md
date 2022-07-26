@@ -17,9 +17,9 @@ We will deploy a Kubernetes cluster using Platform9, deploy HostPath storage, an
 - Deploying a Jupyter notebook in your Kubernetes cluster.
   - Deploy with the default container (<https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>)
 - Get information about the notebook using Kubernetes commands.
-- Access the notebook and set a password using the TOKEN from the container.
+- Access the Notebook using a token.
 - Run “Hello, world!” on your Jupyter notebook.
-  - Create a new notebook and run Hello, World. Congrats, that was your first notebook on Kubernetes!
+  - Create a new notebook and run Hello, World! Congrats, that was your first notebook on Kubernetes!
 - Load an example Tensorflow Tutorial Notebook
   - Run the Notebook and update a section or two.
 
@@ -50,6 +50,8 @@ Now that we have a cluster we will deploy a storage provider so that we can save
 
 This will be done using the App Catalog.
 
+![alt text](images/hostpath.png)
+
 ### Deploy a Jupyter Notebook
 
 Create a deployment using jupyter/tensorflow-notebook. (<https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>)
@@ -75,3 +77,10 @@ print("Hello, World!")
 Download the notebook from (<https://www.tensorflow.org/tutorials/images/classification>)
 
 Download the notebook from (<https://www.tensorflow.org/hub/tutorials/tf2_object_detection>)
+
+Once one of the notebooks have been downloaded we can upload the notebook. At this point we will upload the notebook, open it, and then restart and run the notebook.
+
+There are a couple of helpful commands that we can run when the notebook is working through each section. There are a few sections that will increase the memory and cpu usage. To see what kind of impact this is having on your nodes you can run:
+
+`kubectl top nodes`
+
