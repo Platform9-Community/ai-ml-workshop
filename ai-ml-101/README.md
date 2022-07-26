@@ -4,7 +4,7 @@
 
 ### What to Expect
 
-We will deploy a Kubernetes cluster using Platform9, deploy HostPath storage, and finally deploy a Jupyter notebook backed by persistent storage.
+We will deploy a Kubernetes cluster using Platform9, deploy hostpath storage, and finally deploy a Jupyter notebook backed by persistent storage.
 
 ### Action Items
 
@@ -33,7 +33,7 @@ We will deploy a Kubernetes cluster using Platform9, deploy HostPath storage, an
 
 ### Kubernetes Benefits
 
-Easily scale up Jupyter notebooks for your users. Give each user access to their own notebook so that they can experiment.
+Easily scale up Jupyter notebooks for your users. Give each user access to their own notebook so that they can experiment. Ideally after running a single pod for a Jupyter notebook for testing, we would progress to configuring JupyterHub (<https://zero-to-jupyterhub.readthedocs.io/en/latest/>) to help automate notebooks for our users.
 
 ### Deploy a Cluster with Platform9 Free Tier
 
@@ -50,7 +50,7 @@ We will access the cluster using kubectl, which means we will need to install ku
 
 Now that we have a cluster we will deploy a storage provider so that we can save our work.
 
-This will be done using the App Catalog.
+This will be done using the App Catalog. The App Catalog will allow us to quickly deploy helm based applications.
 
 ![alt text](images/hostpath.png)
 
@@ -60,9 +60,25 @@ Create a deployment using jupyter/tensorflow-notebook. (<https://jupyter-docker-
 
 Examples for two methods, one being NodePort and the other being LoadBalancer.
 
+At this point we can either clone the github repository (<https://github.com/Platform9-Community/ai-ml-workshop>) or you can download/copy the jupyter.yaml file from either the NodePort folder or the LoadBalancer folder under the ai-ml-101 directory.
+
+Once you have the file on your machine, or somewhere that can use kubectl to access the cluster, we can run:
+
+`kubectl create -f jupyter.yaml`
+
 ### Access the Notebook
 
-View the logs from the container so that we can pull the token needed to login.
+Once the notebook has deployed we can pull the logs to figure out the URL + Token. The Tensorflow image is around 1GB so it can take a few moments for the pod to move into a running state. 
+
+Assuming we are deployed in the default namespace, we can view the status of the pod using:
+
+`kubectl get pods -w`
+
+If the original yaml file was modified to use namespaces you would need to specify the namespace:
+
+`kubectl get pods -n NAMESPACE -w`
+
+Once the pod is in a running state we can view the logs:
 
 `kubectl logs jupyter`
 
