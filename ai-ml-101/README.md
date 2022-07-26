@@ -145,9 +145,21 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
   ```bash
   $ kubectl get service jupyter
   NAME               TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                                        AGE
-  jupyter-headless   LoadBalancer   10.21.161.60   192.168.86.10   8888:32765/TCP   35m
+  jupyter   LoadBalancer   10.21.161.60   192.168.86.10   8888:32765/TCP   35m
   ```
-  In this example the IP would be the External-IP `192.168.86.10`.
+  In this example the IP would be the External-IP `192.168.86.10`. Our URL would end up being:
+
+  http://192.168.86.10:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
+
+  If you want to test this out more and are going to keep redeploying with the same configuration, then you can create a record in /etc/hosts for `jupyter`:
+  
+  ```bash
+  # Jupyter
+  192.168.86.10	jupyter
+  ```
+  This would allow you to copy/paste from the container logs and use: 
+
+  http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
 - NodePort
 
