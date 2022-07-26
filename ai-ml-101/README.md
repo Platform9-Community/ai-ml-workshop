@@ -63,9 +63,15 @@ This will be done using the App Catalog. The App Catalog will allow us to quickl
 
 We are going to walk through a simple storage deployment using hostpath. In a production environment you may consider using something like Rook + Ceph instead of hostpath.  This section introduces the App Catalog and options within it, such as being able to modify a default configuration with specific values.
 
+Select the App Catalog option in the Menu.
+
 ![alt text](images/hostpath.png)
 
+Select Deploy on the hostpath tile. Fill in information such as the deployment name, namespace, and select the cluster.
+
 ![alt text](images/hostpath-config.png)
+
+Select the storage option in the menu and then CSI Drivers to view information about what we just deployed.
 
 ![alt text](images/csi-drivers.png)
 
