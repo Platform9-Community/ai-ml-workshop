@@ -143,9 +143,9 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
   If you are using a LoadBalancer then you can replace `jupyter` with the LoadBalancer IP:
 
   ```bash
-  $ kubectl get service jupyter-headless
+  $ kubectl get service jupyter
   NAME               TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                                        AGE
-  jupyter-headless   LoadBalancer   10.21.161.60   192.168.86.10   8888:32765/TCP,7777:30995/TCP,2222:31398/TCP   35m
+  jupyter-headless   LoadBalancer   10.21.161.60   192.168.86.10   8888:32765/TCP   35m
   ```
   In this example the IP would be the External-IP `192.168.86.10`.
 
@@ -153,23 +153,23 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
   If you are using a NodePort service then you will need to figure out the IP + Port to use to replace "jupyter":
 
-```bash
-$ kubectl get svc jupyter
-NAME      TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
-jupyter   NodePort   10.21.50.177   <none>        8888:30833/TCP   6s
-```
+  ```bash
+  $ kubectl get service jupyter
+  NAME      TYPE       CLUSTER-IP     EXTERNAL-IP   PORT(S)          AGE
+  jupyter   NodePort   10.21.50.177   <none>        8888:30833/TCP   6s
+  ```
 
-```bash
-$ kubectl get nodes
-NAME            STATUS   ROLES    AGE    VERSION
-192.168.86.71   Ready    worker   174m   v1.21.3
-192.168.86.72   Ready    master   174m   v1.21.3
-192.168.86.73   Ready    worker   174m   v1.21.3
-```
+  ```bash
+  $ kubectl get nodes
+  NAME            STATUS   ROLES    AGE    VERSION
+  192.168.86.71   Ready    worker   174m   v1.21.3
+  192.168.86.72   Ready    master   174m   v1.21.3
+  192.168.86.73   Ready    worker   174m   v1.21.3
+  ```
 
-We can build out our URL using an IP address from one of our nodes and the port from our NodePort service:
+  We can build out our URL using an IP address from one of our nodes and the port from our NodePort service:
 
-http://192.168.86.71:32765/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
+  http://192.168.86.71:32765/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
 ## Hello World! Example
 
