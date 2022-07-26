@@ -9,11 +9,11 @@ We will deploy a Kubernetes cluster using Platform9, deploy hostpath storage, an
 - Benefits for Machine Learning.
 - Deploy a cluster with Platform9 Free Tier.
   - We will deploy a BareOS Cluster
-    > Platform9 uses the term ‘BareOS’ to refer to a set of physical or virtual machines in your on-premises infrastructure that have a supported linux operating system installed that can be used to create an on-premises Kubernetes cluster.
+    - Platform9 uses the term ‘BareOS’ to refer to a set of physical or virtual machines in your on-premises infrastructure that have a supported linux operating system installed that can be used to create an on-premises Kubernetes cluster.
 - Configure cluster storage with the CSI HostPath driver.
   - Deploy using the App Catalog.
 - Deploying a Jupyter notebook in your Kubernetes cluster.
-  - Deploy with the default container (<https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>)
+  - Deploy with the default container <https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>
 - Get information about the notebook using Kubernetes commands.
 - Access the Notebook using a token.
 - Run “Hello, world!” on your Jupyter notebook.
@@ -29,20 +29,28 @@ We will deploy a Kubernetes cluster using Platform9, deploy hostpath storage, an
   - LoadBalancer will require MetalLB being deployed when configuring the cluster.
   - NodePort will not require additional configuration during cluster deployment.
 
+- Tested both of the Tensorflow examples with small VMs. The workers were 8GB Memory / 4 CPU nodes. For faster results you may want to use larger VMs. The Workshop actually used 32GB Memory / 16 CPU nodes for workers.
+  - If you're running your own deployment/pod and are having issues with the kernel dying frequently, verify that you are adding the requests field with 1GB+ for memory.
+  - ```yml
+        resources:
+        requests:
+          memory: 1000Mi
+  ```
+
 ## Kubernetes Benefits
 
-Easily scale up Jupyter notebooks for your users. Give each user access to their own notebook so that they can experiment. Ideally after running a single pod for a Jupyter notebook for testing, we would progress to configuring JupyterHub (<https://zero-to-jupyterhub.readthedocs.io/en/latest/>) to help automate notebooks for our users.
+Easily scale up Jupyter notebooks for your users. Give each user access to their own notebook so that they can experiment. Ideally after running a single pod for a Jupyter notebook for testing, we would progress to configuring JupyterHub <https://zero-to-jupyterhub.readthedocs.io/en/latest/> to help automate notebooks for our users.
 
 ## Deploy a Cluster with Platform9 Free Tier
 
 We are going to start out by deploying a Kubernetes cluster using Platform9.
 
-- Bare Metal: 2-3 Bare Metal Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
-- VM: with 2-3 Virtual Machines Nodes (<https://platform9.com/docs/kubernetes/get-started-bare-metal>)
+- Bare Metal: 2-3 Bare Metal Nodes <https://platform9.com/docs/kubernetes/get-started-bare-metal>
+- VM: with 2-3 Virtual Machines Nodes <https://platform9.com/docs/kubernetes/get-started-bare-metal>
 
 ![alt text](images/dashboard.png)
 
-We will access the cluster using kubectl, which means we will need to install kubectl (<https://kubernetes.io/docs/tasks/tools/#kubectl>)
+We will access the cluster using kubectl, which means we will need to install kubectl <https://kubernetes.io/docs/tasks/tools/#kubectl>
 
 ## Configure Storage with the CSI HostPath Driver
 
@@ -54,11 +62,11 @@ This will be done using the App Catalog. The App Catalog will allow us to quickl
 
 ## Deploy a Jupyter Notebook
 
-Create a deployment using jupyter/tensorflow-notebook. (<https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>)
+Create a deployment using jupyter/tensorflow-notebook. <https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html>
 
 Examples for two methods, one being NodePort and the other being LoadBalancer.
 
-At this point we can either clone the github repository (<https://github.com/Platform9-Community/ai-ml-workshop>) or you can download/copy the jupyter.yaml file from either the NodePort folder or the LoadBalancer folder under the ai-ml-101 directory.
+At this point we can either clone the github repository <https://github.com/Platform9-Community/ai-ml-workshop> or you can download/copy the jupyter.yaml file from either the NodePort folder or the LoadBalancer folder under the ai-ml-101 directory.
 
 Once you have the file on your machine, or somewhere that can use kubectl to access the cluster, we can run:
 
@@ -124,7 +132,7 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
   NAME               TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)                                        AGE
   jupyter-headless   LoadBalancer   10.21.161.60   192.168.86.10   8888:32765/TCP,7777:30995/TCP,2222:31398/TCP   35m
   ```
-  In this example the IP would be the External-IP `192.168.86.10`. 
+  In this example the IP would be the External-IP `192.168.86.10`.
 
 - NodePort
 
@@ -140,9 +148,9 @@ print("Hello, World!")
 
 ## Tensorflow Example Notebook
 
-Download the notebook from (<https://www.tensorflow.org/tutorials/images/classification>)
+Download the notebook from <https://www.tensorflow.org/tutorials/images/classification>
 
-Download the notebook from (<https://www.tensorflow.org/hub/tutorials/tf2_object_detection>)
+Download the notebook from <https://www.tensorflow.org/hub/tutorials/tf2_object_detection>
 
 Once one of the notebooks have been downloaded we can upload the notebook. At this point we will upload the notebook, open it, and then restart and run the notebook.
 
@@ -160,3 +168,11 @@ NAME            CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
 192.168.86.72   638m         15%    2180Mi          28%       
 192.168.86.73   2091m        52%    7049Mi          91%       
 ```
+
+We can also view information about our cluster in the Platform9 UI:
+
+![alt text](images/pf9-clusterinfo.png)
+
+## Reach out if you have questions or if you want to learn more
+
+<https://slack.platform9.io/>
