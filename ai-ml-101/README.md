@@ -52,7 +52,7 @@ We are going to start out by deploying a Kubernetes cluster using Platform9. Her
 
 ![alt text](images/dashboard.png)
 
-For installation information check out the links below. The same guide can be used for Bare Metal or VMs. We will want to 
+For installation information check out the links below. The same guide can be used for Bare Metal or VMs.
 
 - <https://platform9.com/docs/kubernetes/get-started-bare-metal>
 
@@ -139,7 +139,7 @@ Executing the command: jupyter lab
 
 In the example above we are looking for the URL:
 
-http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
+<http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5>
 
 - LoadBalancer
 
@@ -153,18 +153,18 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
   In this example the IP would be the External-IP `192.168.86.10`. Our URL would end up being:
 
-  http://192.168.86.10:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
+  <http://192.168.86.10:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5>
 
   If you want to test this out more, and are going to keep redeploying with the same configuration, then you can create a record in /etc/hosts for `jupyter`:
   
   ```bash
   # Jupyter
-  192.168.86.10	jupyter
+  192.168.86.10 jupyter
   ```
 
   This would allow you to copy/paste from the container logs and use:
 
-  http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
+  <http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5>
 
 - NodePort
 
@@ -186,7 +186,7 @@ http://jupyter:8888/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
 
   We can build out our URL using an IP address from one of our nodes and the port from our NodePort service:
 
-  http://192.168.86.71:32765/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5
+  <http://192.168.86.71:32765/lab?token=df6d103b0944468bec9eb658184548bdc66bf0cf6e1462a5>
 
 ## Hello World! Example
 
